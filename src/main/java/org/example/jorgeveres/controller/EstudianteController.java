@@ -1,5 +1,6 @@
 package org.example.jorgeveres.controller;
 
+import jakarta.validation.Valid;
 import org.example.jorgeveres.model.Estudiante;
 import org.example.jorgeveres.service.EstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,35 +8,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-
 @RequestMapping("/api/estudiantes")
-
 public class EstudianteController {
 
-// Volvemos a usar Inyección de Dependencias para traer el Service
-
     @Autowired
-
     private EstudianteService service;
 
-// Endpoint para guardar (POST: http://localhost:8080/api/estudiantes)
-
     @PostMapping
-
-    public Estudiante crear(@RequestBody Estudiante estudiante) {
-
+    public Estudiante crear(@Valid @RequestBody Estudiante estudiante) {
         return service.guardarEstudiante(estudiante);
-
     }
-
-// Endpoint para listar (GET: http://localhost:8080/api/estudiantes)
 
     @GetMapping
-
     public List<Estudiante> listarTodos() {
-
         return service.obtenerTodos();
-
     }
 
+    @GetMapping("/{id}")
+    public Estudiante obtenerPorId(@PathVariable Long id) {
+        return service.obtenerPorId(id);
+    }
+
+    @PutMapping("/{id}")
+    public Estudiante actualizar(@PathVariable Long id, @Valid @RequestBody Estudiante datos) {
+        return service.actualizarEstudiante(id, datos);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable Long id) {
+        service.eliminarEstudiante(id);
+    }
 }
