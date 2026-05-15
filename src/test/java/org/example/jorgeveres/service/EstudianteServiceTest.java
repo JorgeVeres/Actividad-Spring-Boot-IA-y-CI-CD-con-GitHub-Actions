@@ -28,8 +28,8 @@ public  class  EstudianteServiceTest {
     void  setUp() {
         estudiante = new  Estudiante();
         estudiante.setId(1L);
-        estudiante.setNombre("Juan Perez");
-        estudiante.setEmail("juan@ejemplo.com");
+        estudiante.setNombre("Samuel");
+        estudiante.setEmail("Samuel@ejemplo.com");
         estudiante.setEdad(20);
     }
 
